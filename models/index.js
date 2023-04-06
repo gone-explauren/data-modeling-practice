@@ -11,6 +11,8 @@ const sequelize = new Sequelize(SQL_URL)
 const BandModel = createBand(sequelize);
 const BandMemberModel = createBandMember(sequelize);
 
+const Collection = require('./collection.js');
+
 // create our associations / relationships
 // (from sequelize model method)
 
@@ -20,6 +22,6 @@ BandMemberModel.belongsTo(BandModel, { foriegnKey: "bandID", targetKey: 'id' });
 
 module.exports = { 
 	sequelize, 
-	Band: BandModel, 
-	BandMember: BandMemberModel 
+	Band: new Collection(BandModel), 
+	BandMember: new Collection(BandMemberModel), 
 }

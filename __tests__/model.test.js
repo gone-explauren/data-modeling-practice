@@ -37,13 +37,13 @@ describe('Testing data models', () => {
 		expect(newBandMember.bandID).toEqual('bandID');
 	});
 
-	// xtest('Should fetch a member and their band name', async () => {
-	// 	let bandMember = await BandMember.findOne({
+	// xtest('Should retrieve a member and their band name', async () => {
+	// 	let bandMember = await BandMember.read(bandMember.id, {
 	// 		where {
 	// 			name: "Ben Zickau"
 	// 		}), {
 	// 		// include the parent model, BandModel (exported as Band here)
-	// 		include: Band
+	// 		include: Band.model
 	// 	}
 	// }
 	// });
