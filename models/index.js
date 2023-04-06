@@ -1,0 +1,25 @@
+'use strict'
+
+const { Sequelize } = require('sequilize');
+const SQL_URL = process.env.SQL_URL || 3001;
+
+const createBand = require('./band.js');
+const createBandMember = require('./band-member.js');
+
+const sequelize = new Sequelize(SQL_URL)
+
+const BandModel = createBand(sequelize);
+const BandMemberModel = createBandMember(sequelize);
+
+// create our associations / relationships
+// (from sequelize model method)
+
+// BandModel will be the primary model, and the BandMemberModel will be related to this through the foriegn key
+BandModel.hasMany(BandMemberModel, { foriegnKey: "bandID", sourceKey: 'id' });
+BandMemberModel.belongsTo(BandModel, { foriegnKey: "bandID", targetKey: 'id' });
+
+module.exports = { 
+	sequelize, 
+	Band: BandModel, 
+	BandMember: BandMemberModel 
+}
