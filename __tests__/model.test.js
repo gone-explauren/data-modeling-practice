@@ -10,6 +10,7 @@ afterAll(async() => {
 });
 
 let bandID = null;
+let bandMemberID = null;
 
 describe('Testing data models', () => {
 	xtest('Should create a band', async () => {
@@ -22,11 +23,11 @@ describe('Testing data models', () => {
 
 		bandID = newBand.id
 		expect(newBand.name).toEqual('Shadow Work');
-		expect(newBand.id).toBeTruthy;
+		expect(newBand.id).toBeTruthy();
 	});
 
 	xtest('Should create a band member', async () => {
-		let newBand = await BandMember.create({
+		let newBandMember = await BandMember.create({
 			name: 'Ben Zickau',
 			instrument: 'drums',
 			canSing: false,
@@ -37,19 +38,13 @@ describe('Testing data models', () => {
 		expect(newBandMember.bandID).toEqual('bandID');
 	});
 
-	// xtest('Should retrieve a member and their band name', async () => {
-	// 	let bandMember = await BandMember.read(bandMember.id, {
-	// 		where {
-	// 			name: "Ben Zickau"
-	// 		}), {
-	// 		// include the parent model, BandModel (exported as Band here)
-	// 		include: Band.model
-	// 	}
-	// }
-	// });
+	xtest('Can fetch a member and band', async () => {
+    let bandMember = await BandMember.read(bandMemberId, {
+      include: Band.model
+    });
 
-	// console.log("Member with association: ", bandMember, " Band: ", bandMember.Band.name);
-	// expect(bandMember.name).toEqual
-	// expect(bandMember.Band.name).toEqual("Shadow Work");
-	// });
+    console.log("Band member with association: ", bandMember);
+    expect(bandMember.name).toEqual('Ben Zickau');
+    expect(bandMember.Band.name).toEqual('Shadow Work');
+  });
 });

@@ -1,7 +1,7 @@
 'use strict'
 // barrel index.js file
 
-const { DateTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 // circular imports (apprently? I'm not really sure how, but this is how we fixed it)
 // first, do not import sequelize here
@@ -10,14 +10,23 @@ const { DateTypes } = require('sequelize');
 // inject sequelize here instead of importing with require
 // sequelize is passed as an argument on the barrel index.js page
 const Band = (sequelize) => sequelize.define('Band', {
-	name: (),
-	genre: (
-		type: DataTypes.ENUM('rock', 'pop', 'rap', 'punk', 'psychedelic', 'classical'),
+	name: {
+		type: DataTypes.STRING,
+		allowNull: false,
+	},
+	genre: {
+		type: DataTypes.ENUM('rock', 'pop', 'rap', 'punk', 'folk', 'indie', 'psychedelic', 'classical'),
 		defaultValue: 'rock',
-		allowNull: false
-	),
-	whereFrom: (),
-	onTour: ()
+		allowNull: false,
+	},
+	whereFrom: {
+		type: DataTypes.STRING,
+		allowNull: false,
+	},
+	onTour: {
+		type: DataTypes.BOOLEAN,
+    allowNull: false,
+	},
 });
 
 module.exports = Band;

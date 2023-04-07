@@ -1,10 +1,10 @@
 'use strict'
 
 const { Sequelize } = require('sequilize');
-const SQL_URL = process.env.SQL_URL || 3001;
+const SQL_URL = process.env.SQL_URL || 'sqlite:memory:';
 
 const createBand = require('./band.js');
-const createBandMember = require('./band-member.js');
+const createBandMember = require('./bandMember.js');
 
 const sequelize = new Sequelize(SQL_URL)
 
@@ -24,4 +24,4 @@ module.exports = {
 	sequelize, 
 	Band: new Collection(BandModel), 
 	BandMember: new Collection(BandMemberModel), 
-}
+};
