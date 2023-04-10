@@ -1,1 +1,1 @@
-# demo
+# data-modeling-practice
